@@ -1,5 +1,11 @@
 SHELL := /bin/bash
 
+# Include nvm-managed Node.js binaries in PATH
+NVM_BIN := $(lastword $(wildcard $(HOME)/.nvm/versions/node/*/bin))
+ifneq ($(NVM_BIN),)
+export PATH := $(NVM_BIN):$(PATH)
+endif
+
 .PHONY: example-api-testing example-unified-testing \
        example-wikipedia example-flipkart example-google \
        examples examples-api examples-e2e help
