@@ -2,3 +2,32 @@ node_modules/
 test-results/
 package-lock.json
 .DS_Store
+
+# Local secrets (e.g. TESTRELIC_API_KEY) — never commit
+.env
+.env.local
+.env.*.local
+
+# Shared mobile binaries (see mobile-apps/README.md)
+mobile-apps/*.apk
+mobile-apps/*.ipa
+mobile-apps/*.aab
+mobile-apps/*.app
+
+# TestRelic upload queue (local retries; do not commit)
+**/.testrelic/queue/
+
+# TestRelic test artifacts
+playwright/api-testing/test-results/artifacts/
+
+# TestRelic test artifacts
+playwright/wikipedia/test-results/artifacts/
+
+# TestRelic test artifacts
+playwright/flipkart/test-results/artifacts/
+
+# TestRelic test artifacts
+playwright/google/test-results/artifacts/
+
+# TestRelic test artifacts
+playwright/unified-testing/test-results/artifacts/

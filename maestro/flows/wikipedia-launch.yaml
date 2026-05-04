@@ -1,0 +1,22 @@
+appId: org.wikipedia
+tags:
+  - android
+  - wikipedia
+---
+- launchApp
+- tapOn:
+    text: "Skip"
+    optional: true
+- tapOn:
+    text: "Get started"
+    optional: true
+- tapOn:
+    text: "CONTINUE"
+    optional: true
+- tapOn:
+    text: "Not now"
+    optional: true
+- extendedWaitUntil:
+    visible:
+      id: "org.wikipedia:id/search_container"
+    timeout: 60000

@@ -5,12 +5,10 @@ Demonstrates using **both browser-based E2E tests and API tests** in a single pr
 ## Setup
 
 ```bash
-# From monorepo root
-pnpm install
-pnpm build
+# From this example directory
+npm install
 
 # Install browsers (needed for E2E tests)
-cd examples/unified-testing
 npx playwright install chromium
 ```
 
@@ -30,7 +28,7 @@ npx playwright test
 
 ## Key Difference from API-Only Example
 
-- **API-only** (`examples/api-testing`): Uses `testRelicApiFixture` — provides only `request`, no browser dependency
+- **API-only** ([`../api-testing`](../api-testing)): Uses `testRelicApiFixture` — provides only `request`, no browser dependency
 - **Unified** (this example): Uses `testRelicFixture` — provides both `page` and `request`
 
 ```typescript

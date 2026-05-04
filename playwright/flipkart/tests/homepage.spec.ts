@@ -38,7 +38,8 @@ test.describe('Flipkart Homepage', { tag: ['@e2e'] }, () => {
       'input[name="q"], input[title="Search for Products, Brands and More"], input[type="text"]',
     ).first();
     await expect(searchInput).toBeVisible({ timeout: 10_000 });
-    await searchInput.click();
+    // Focus avoids overlays that intercept pointer events on Flipkart promos.
+    await searchInput.focus();
     await expect(searchInput).toBeFocused();
   });
 });

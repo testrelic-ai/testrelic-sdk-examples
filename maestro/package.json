@@ -1,0 +1,14 @@
+{
+  "name": "example-maestro",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "test": "node scripts/run-tests.cjs"
+  },
+  "dependencies": {
+    "@testrelic/maestro-analytics": "^1.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

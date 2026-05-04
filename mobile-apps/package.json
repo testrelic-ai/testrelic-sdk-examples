@@ -1,0 +1,9 @@
+{
+  "name": "mobile-apps-artifacts",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Download shared Wikipedia APK into this folder (not committed to git)",
+  "scripts": {
+    "download": "node download-wikipedia-apk.mjs"
+  }
+}

@@ -7,9 +7,10 @@
     "test": "npx playwright test"
   },
   "dependencies": {
-    "@testrelic/playwright-analytics": "^2.1.2"
+    "@testrelic/playwright-analytics": "^2.7.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.35.0"
+    "@playwright/test": "^1.35.0",
+    "dotenv": "^16.4.5"
   }
 }

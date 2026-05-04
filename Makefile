@@ -8,36 +8,50 @@ endif
 
 .PHONY: example-api-testing example-unified-testing \
        example-wikipedia example-flipkart example-google \
-       examples examples-api examples-e2e help
+       example-appium example-maestro example-mobile-apps-download \
+       examples examples-api examples-e2e examples-mobile help
 
 ##@ API Examples
 
 example-api-testing: ## Run API testing example (no browser needed)
-	cd api-testing && npm install && npx playwright test
+	cd playwright/api-testing && npm install && npx playwright test
 
 ##@ E2E Examples
 
 example-wikipedia: ## Run Wikipedia example
-	cd wikipedia && npm install && npx playwright install chromium && npx playwright test
+	cd playwright/wikipedia && npm install && npx playwright install chromium && npx playwright test
 
 example-flipkart: ## Run Flipkart example
-	cd flipkart && npm install && npx playwright install chromium && npx playwright test
+	cd playwright/flipkart && npm install && npx playwright install chromium && npx playwright test
 
 example-google: ## Run Google example
-	cd google && npm install && npx playwright install chromium && npx playwright test
+	cd playwright/google && npm install && npx playwright install chromium && npx playwright test
 
 ##@ Unified Examples
 
 example-unified-testing: ## Run unified (E2E + API) testing example
-	cd unified-testing && npm install && npx playwright install chromium && npx playwright test
+	cd playwright/unified-testing && npm install && npx playwright install chromium && npx playwright test
+
+##@ Mobile Examples (require ../mobile-apps/wikipedia.apk + Android device/emulator)
+
+example-mobile-apps-download: ## Download Wikipedia APK into mobile-apps/ (F-Droid production)
+	cd mobile-apps && node download-wikipedia-apk.mjs
+
+example-appium: ## Run Appium + WebdriverIO Wikipedia smoke (APK required)
+	cd appium && npm install && npx appium driver install uiautomator2 2>/dev/null || true && npm test
+
+example-maestro: ## Run Maestro flows with TestRelic wrapper (APK installed on device)
+	cd maestro && npm install && npm test
 
 ##@ Run All
 
 examples-api: example-api-testing ## Run all API examples
 
-examples-e2e: example-wikipedia example-flipkart example-google ## Run all E2E examples
+examples-e2e: example-wikipedia example-flipkart example-google ## Run all Playwright E2E examples
 
-examples: example-api-testing example-unified-testing example-wikipedia example-flipkart example-google ## Run all examples
+examples-mobile: example-appium example-maestro ## Run mobile examples (device + APK required)
+
+examples: example-api-testing example-unified-testing example-wikipedia example-flipkart example-google ## Run all Playwright examples
 
 ##@ Help
 
