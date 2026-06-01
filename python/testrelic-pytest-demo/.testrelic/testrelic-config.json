@@ -1,0 +1,13 @@
+{
+  "cloud": {
+    "apiKey": "$TESTRELIC_API_KEY",
+    "endpoint": "https://platform.testrelic.ai/api/v1",
+    "upload": "both",
+    "uploadArtifacts": true,
+    "projectName": "shoprelic-pytest-demo"
+  },
+  "metadata": {
+    "team": "platform",
+    "demo": "pytest-protocols"
+  }
+}

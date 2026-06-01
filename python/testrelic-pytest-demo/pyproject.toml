@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "shoprelic-pytest-demo"
+version = "1.0.0"
+description = "TestRelic pytest demo — all API protocols + Python SDK suite, uploading to the TestRelic cloud."
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.hatch.build.targets.wheel]
+packages = ["shoprelic_api"]
+
+[tool.pytest.ini_options]
+# Put the repo root on sys.path so `shoprelic_api` / `evals` import regardless of
+# whether pytest is invoked as `pytest tests/`, `pytest evals/`, etc.
+pythonpath = ["."]
+addopts = "-ra"
+markers = [
+  "smoke: fast critical-path checks",
+  "regression: guards against known regressions",
+  "api: exercises an API protocol (rest/graphql/grpc/ws/kafka/mcp)",
+  "streaming: streaming/messaging protocol (kafka/grpc/websocket)",
+  "ui: Playwright browser test",
+  "appium: Appium mobile test (auto-skips without a device)",
+  "flaky: intentionally flaky under FLAKY_UNIT",
+  "nightly: heavier suites for the nightly bucket",
+]

@@ -1,0 +1,9 @@
+# DeepEval LLM-evaluation suite (optional, heavier install).
+#   pip install -r requirements-evals.txt
+#
+# testrelic-deepeval IS the top-level package of the monorepo (import name
+# `testrelic`). Installed editable from source for version parity; the public
+# package is `testrelic-deepeval` on PyPI (0.1.2+).
+
+-e ../../../testrelic-platform/testrelic-python-sdk
+deepeval>=2.0,<4.0

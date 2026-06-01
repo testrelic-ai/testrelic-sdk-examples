@@ -1,0 +1,16 @@
+{
+  "name": "example-amazon",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "dependencies": {
+    "@testrelic/playwright-analytics": "^2.7.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.35.0",
+    "dotenv": "^16.4.5"
+  }
+}

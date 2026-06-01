@@ -1,0 +1,26 @@
+# Core demo: testrelic-pytest (all protocols) + testrelic-playwright + the app.
+#
+# Installed from the local monorepo source because PyPI testrelic-pytest is 0.1.1
+# (pre-protocols) while the protocol fixtures + HTTP auto-detection require >=0.2.
+# The editable paths below assume the private `testrelic-platform` monorepo is
+# checked out as a sibling of this examples repo:
+#     <workspace>/testrelic-sdk-examples/python/testrelic-pytest-demo/   (here)
+#     <workspace>/testrelic-platform/testrelic-python-sdk/               (the SDK)
+# When >=0.3 is published to PyPI, replace the two editable lines with:
+#     testrelic-pytest>=0.3.0,<0.4
+#     testrelic-playwright>=0.2.0,<0.3
+#
+# The protocol suites run in SYNTHETIC/manual mode, so the heavy transport extras
+# (kafka/grpc/websocket/...) are NOT required. For the live-WebSocket test or real
+# brokers, additionally install:  pip install "testrelic-pytest[all]"
+
+-e ../../../testrelic-platform/testrelic-python-sdk/packages/testrelic-pytest
+-e ../../../testrelic-platform/testrelic-python-sdk/packages/testrelic-playwright
+
+# App + test runtime
+fastapi>=0.110
+uvicorn[standard]>=0.29
+httpx>=0.27,<1.0
+strawberry-graphql>=0.220
+pytest>=7.0
+pytest-playwright>=0.5.0

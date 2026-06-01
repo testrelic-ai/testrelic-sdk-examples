@@ -7,7 +7,7 @@ export PATH := $(NVM_BIN):$(PATH)
 endif
 
 .PHONY: example-api-testing example-unified-testing \
-       example-wikipedia example-flipkart example-google \
+       example-wikipedia example-flipkart example-google example-amazon \
        example-appium example-maestro example-mobile-apps-download \
        examples examples-api examples-e2e examples-mobile help
 
@@ -26,6 +26,9 @@ example-flipkart: ## Run Flipkart example
 
 example-google: ## Run Google example
 	cd playwright/google && npm install && npx playwright install chromium && npx playwright test
+
+example-amazon: ## Run Amazon multi-page crawl example
+	cd playwright/amazon && npm install && npx playwright install chromium && npx playwright test
 
 ##@ Unified Examples
 
@@ -47,11 +50,11 @@ example-maestro: ## Run Maestro flows with TestRelic wrapper (APK installed on d
 
 examples-api: example-api-testing ## Run all API examples
 
-examples-e2e: example-wikipedia example-flipkart example-google ## Run all Playwright E2E examples
+examples-e2e: example-wikipedia example-flipkart example-google example-amazon ## Run all Playwright E2E examples
 
 examples-mobile: example-appium example-maestro ## Run mobile examples (device + APK required)
 
-examples: example-api-testing example-unified-testing example-wikipedia example-flipkart example-google ## Run all Playwright examples
+examples: example-api-testing example-unified-testing example-wikipedia example-flipkart example-google example-amazon ## Run all Playwright examples
 
 ##@ Help
 

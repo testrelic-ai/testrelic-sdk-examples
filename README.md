@@ -1,31 +1,56 @@
 # TestRelic SDK Examples
 
-This repository is organized into **three** areas:
+A single monorepo of TestRelic SDK demos, organized by **language** and then **framework**:
+
+```
+nodejs/     JavaScript / TypeScript demos (@testrelic/* npm packages)
+  playwright/    Web E2E + API tests
+  appium/        Android UI tests (WebdriverIO + Appium 2)
+  maestro/       Mobile flows
+  mobile-apps/   Shared mobile binaries (apk/ipa ignored by git)
+python/     Python demos (testrelic-* PyPI packages)
+  testrelic-pytest-demo/   pytest across all API protocols (REST/GraphQL/gRPC/
+                           WebSocket/Kafka/MCP) + Playwright + DeepEval + Appium,
+                           uploading real runs to the TestRelic cloud
+```
+
+## NodeJS demos ([`nodejs/`](./nodejs))
 
 | Area | Stack | What it demonstrates |
 |------|--------|----------------------|
-| [playwright](./playwright) | Playwright + [`@testrelic/playwright-analytics`](https://www.npmjs.com/package/@testrelic/playwright-analytics) | Web E2E and API tests on real sites, analytics reports |
-| [appium](./appium) | WebdriverIO + Appium 2 + [`@testrelic/appium-analytics`](https://www.npmjs.com/package/@testrelic/appium-analytics) | Android UI tests on the **real Wikipedia app** from a shared APK, local + optional cloud reports |
-| [maestro](./maestro) | Maestro + [`@testrelic/maestro-analytics`](https://www.npmjs.com/package/@testrelic/maestro-analytics) | Mobile flows on the same Wikipedia app |
+| [playwright](./nodejs/playwright) | Playwright + [`@testrelic/playwright-analytics`](https://www.npmjs.com/package/@testrelic/playwright-analytics) | Web E2E and API tests (incl. multi-page Amazon crawl), analytics reports |
+| [appium](./nodejs/appium) | WebdriverIO + Appium 2 + [`@testrelic/appium-analytics`](https://www.npmjs.com/package/@testrelic/appium-analytics) | Android UI tests on the **real Wikipedia app** from a shared APK, local + optional cloud reports |
+| [maestro](./nodejs/maestro) | Maestro + [`@testrelic/maestro-analytics`](https://www.npmjs.com/package/@testrelic/maestro-analytics) | Mobile flows on the same Wikipedia app |
 
-Shared mobile binaries live under [mobile-apps](./mobile-apps) (ignored by git). Populate **`wikipedia.apk`** with:
+## Python demos ([`python/`](./python))
+
+| Area | Stack | What it demonstrates |
+|------|--------|----------------------|
+| [testrelic-pytest-demo](./python/testrelic-pytest-demo) | pytest + `testrelic-pytest` / `testrelic-playwright` / `testrelic-deepeval` / `testrelic-appium` | All API protocols (REST/GraphQL/gRPC/WebSocket/Kafka/MCP), an LLM-eval suite, and a regression→recovery seed arc, all uploading to the TestRelic cloud. See [python/testrelic-pytest-demo/README.md](./python/testrelic-pytest-demo/README.md). |
+
+> **Note:** the Python demo currently installs the SDKs editable from the
+> private `testrelic-platform` monorepo (a sibling checkout) because the protocol
+> features require `testrelic-pytest >= 0.2` while PyPI is at `0.1.1`. Once `>= 0.3`
+> is published, its `requirements.txt` switches to pinned PyPI versions.
+
+Shared mobile binaries live under [nodejs/mobile-apps](./nodejs/mobile-apps) (ignored by git). Populate **`wikipedia.apk`** with:
 
 ```bash
-node mobile-apps/download-wikipedia-apk.mjs
+node nodejs/mobile-apps/download-wikipedia-apk.mjs
 ```
 
-See [mobile-apps/README.md](./mobile-apps/README.md).
+See [nodejs/mobile-apps/README.md](./nodejs/mobile-apps/README.md).
 
 **Windows:** the [Makefile](./Makefile) targets use bash-style `cd` chains. Use **Git Bash** or **WSL**, or run the `npm` / `npx` commands from each project’s README directly in PowerShell.
 
 ---
 
-## Playwright ([`playwright/`](./playwright))
+## Playwright ([`nodejs/playwright/`](./nodejs/playwright))
 
-See [playwright/README.md](./playwright/README.md) for the examples table and commands.
+See [nodejs/playwright/README.md](./nodejs/playwright/README.md) for the examples table and commands.
 
 ```bash
-cd playwright/api-testing
+cd nodejs/playwright/api-testing
 npm install
 npx playwright test
 ```
@@ -33,7 +58,7 @@ npx playwright test
 Browser examples need Chromium:
 
 ```bash
-cd playwright/wikipedia
+cd nodejs/playwright/wikipedia
 npm install
 npx playwright install chromium
 npx playwright test
@@ -87,7 +112,7 @@ export default defineConfig({
 });
 ```
 
-See [playwright/README.md](./playwright/README.md) for cloud setup and per-example `.testrelic/testrelic-config.json` project names.
+See [nodejs/playwright/README.md](./nodejs/playwright/README.md) for cloud setup and per-example `.testrelic/testrelic-config.json` project names.
 
 #### API tracking options
 
@@ -101,16 +126,16 @@ See [playwright/README.md](./playwright/README.md) for cloud setup and per-examp
 | `apiIncludeUrls` | `(string \| RegExp)[]` | `[]` | Only track matching URLs |
 | `apiExcludeUrls` | `(string \| RegExp)[]` | `[]` | Exclude matching URLs |
 
-See [playwright/api-testing](./playwright/api-testing) for configuration demos and the [npm package readme](https://www.npmjs.com/package/@testrelic/playwright-analytics) for the full reference.
+See [nodejs/playwright/api-testing](./nodejs/playwright/api-testing) for configuration demos and the [npm package readme](https://www.npmjs.com/package/@testrelic/playwright-analytics) for the full reference.
 
 ---
 
-## Appium ([`appium/`](./appium))
+## Appium ([`nodejs/appium/`](./nodejs/appium))
 
-Uses **`../mobile-apps/wikipedia.apk`** (see [mobile-apps/README.md](./mobile-apps/README.md)) and **`@testrelic/appium-analytics`** (service + reporter in [`wdio.conf.ts`](./appium/wdio.conf.ts), optional cloud when `TESTRELIC_API_KEY` is set). See [appium/README.md](./appium/README.md).
+Uses **`../mobile-apps/wikipedia.apk`** (see [nodejs/mobile-apps/README.md](./nodejs/mobile-apps/README.md)) and **`@testrelic/appium-analytics`** (service + reporter in [`wdio.conf.ts`](./nodejs/appium/wdio.conf.ts), optional cloud when `TESTRELIC_API_KEY` is set). See [nodejs/appium/README.md](./nodejs/appium/README.md).
 
 ```bash
-cd appium
+cd nodejs/appium
 npm install
 npx appium driver install uiautomator2
 npm test
@@ -118,24 +143,40 @@ npm test
 
 ---
 
-## Maestro ([`maestro/`](./maestro))
+## Maestro ([`nodejs/maestro/`](./nodejs/maestro))
 
 Install the Wikipedia APK on a device or emulator, then:
 
 ```bash
-cd maestro
+cd nodejs/maestro
 npm install
 npm test
 ```
 
-Uses the TestRelic Maestro wrapper (`testrelic-maestro`) and [`.testrelic/testrelic-config.json`](./maestro/.testrelic/testrelic-config.json) for dashboard project naming and optional cloud. Details: [maestro/README.md](./maestro/README.md).
+Uses the TestRelic Maestro wrapper (`testrelic-maestro`) and [`.testrelic/testrelic-config.json`](./nodejs/maestro/.testrelic/testrelic-config.json) for dashboard project naming and optional cloud. Details: [nodejs/maestro/README.md](./nodejs/maestro/README.md).
+
+---
+
+## Python ([`python/testrelic-pytest-demo/`](./python/testrelic-pytest-demo))
+
+```bash
+cd python/testrelic-pytest-demo
+python -m venv .venv && .venv/Scripts/activate   # PowerShell: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python verification/verify.py    # offline proof — asserts every metric reaches the wire
+```
+
+Covers `testrelic-pytest` across all API protocols, plus `testrelic-deepeval`,
+`testrelic-playwright`, and `testrelic-appium`. See
+[python/testrelic-pytest-demo/README.md](./python/testrelic-pytest-demo/README.md).
 
 ---
 
 ## Prerequisites
 
-- **Node.js** >= 18
+- **Node.js** >= 18 (NodeJS demos)
 - **Playwright** >= 1.35.0 (Playwright examples)
+- **Python** >= 3.10 (Python demos)
 - **Android SDK / Maestro CLI / JDK** as described in the Appium and Maestro READMEs
 
 ## License

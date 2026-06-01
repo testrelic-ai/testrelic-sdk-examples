@@ -1,0 +1,6 @@
+# Appium mobile suite (optional — only needed if you have an Appium server +
+# device/emulator). Without these the suite auto-skips.
+#   pip install -r requirements-appium.txt
+
+-e ../../../testrelic-platform/testrelic-python-sdk/packages/testrelic-appium
+Appium-Python-Client>=4.0,<6.0

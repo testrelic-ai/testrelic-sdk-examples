@@ -8,26 +8,41 @@ package-lock.json
 .env.local
 .env.*.local
 
-# Shared mobile binaries (see mobile-apps/README.md)
-mobile-apps/*.apk
-mobile-apps/*.ipa
-mobile-apps/*.aab
-mobile-apps/*.app
+# Editor / agent scratch
+.cursor/
+.vscode/
+
+# Shared mobile binaries (see nodejs/mobile-apps/README.md)
+nodejs/mobile-apps/*.apk
+nodejs/mobile-apps/*.ipa
+nodejs/mobile-apps/*.aab
+nodejs/mobile-apps/*.app
 
 # TestRelic upload queue (local retries; do not commit)
 **/.testrelic/queue/
 
-# TestRelic test artifacts
-playwright/api-testing/test-results/artifacts/
+# TestRelic local cache + run telemetry (machine-specific; not source)
+**/.testrelic/cache/
+.testrelic-output/
+.testrelic-cache/
 
-# TestRelic test artifacts
-playwright/wikipedia/test-results/artifacts/
+# TestRelic test artifacts (screenshots/videos produced by runs)
+**/test-results/artifacts/
+nodejs/appium/artifacts/
 
-# TestRelic test artifacts
-playwright/flipkart/test-results/artifacts/
-
-# TestRelic test artifacts
-playwright/google/test-results/artifacts/
-
-# TestRelic test artifacts
-playwright/unified-testing/test-results/artifacts/
+# ── Python ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.deepeval*
+# Python demo verification artifacts (only the servers + verify.py are tracked)
+python/**/verification/*.jsonl
+python/**/verification/*.log
+python/**/verification/*.out
+python/**/verification/_*.py
+python/**/verification/*.json

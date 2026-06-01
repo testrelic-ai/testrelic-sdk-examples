@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets / local config
+.env
+
+# TestRelic local cache + upload queue + debug dumps
+.testrelic/cache/
+.testrelic/queue/
+run*.json
+test-results/
+analytics-timeline.*
+
+# Verification artifacts
+verification/received_runs.jsonl
+verification/received_evals.jsonl
+verification/verify.log
+
+# DeepEval
+.deepeval*
