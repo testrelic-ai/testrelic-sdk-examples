@@ -30,11 +30,9 @@ python -m venv .venv && .venv\Scripts\activate      # (PowerShell: .venv\Scripts
 pip install -r requirements.txt
 ```
 
-> **Install note.** The SDKs install from the local monorepo
-> (`../testrelic-platform/testrelic-python-sdk`) because the protocol fixtures + HTTP
-> auto-detection require `testrelic-pytest >= 0.2`, while PyPI is still at `0.1.1`.
-> Once `>= 0.3` is published, swap the editable lines in `requirements.txt` for pinned
-> PyPI versions — nothing else changes.
+> **Install note.** The SDKs install straight from PyPI — no monorepo checkout
+> needed. The demo pins `testrelic-pytest >= 0.3` because the protocol fixtures +
+> HTTP auto-detection require it.
 
 ### 1. Prove it works offline (no key, no network)
 

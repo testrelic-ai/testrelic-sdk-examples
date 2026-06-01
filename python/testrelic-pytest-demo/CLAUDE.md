@@ -61,8 +61,8 @@ pytest mobile/                                                                  
   reserved by pytest-base-url, which pytest-playwright pulls in).
 - Markers are registered in `pyproject.toml` (`smoke/regression/api/streaming/ui/
   appium/flaky/nightly`).
-- SDKs install editable from `../testrelic-platform/testrelic-python-sdk` until
-  protocols ship to PyPI (`testrelic-pytest >= 0.3`).
+- SDKs install from PyPI (`testrelic-pytest >= 0.3` for the protocol fixtures +
+  HTTP auto-detection); no monorepo checkout needed.
 - No database — app state is in-memory and resets on restart.
 
 ## Test user
